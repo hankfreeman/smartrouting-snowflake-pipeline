@@ -1,0 +1,19 @@
+# Same as Dockerfile.5tower.unified but bundles exports/multitower_sale_5towers_best
+# (housing → Alec + meta). Build after: train_alec + build_best_config_model.py
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY inference_server/requirements-5tower-unified.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY inference_server/app_5tower_unified.py app.py
+COPY ml ml
+COPY exports/multitower_sale_5towers_best /app/models/multitower_sale_5towers
+
+RUN mkdir -p /mnt/stage
+ENV MODEL_PATH=/app/models/multitower_sale_5towers
+ENV PORT=8080
+EXPOSE 8080
+
+CMD ["python", "app.py"]

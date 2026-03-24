@@ -1,0 +1,21 @@
+# Unified 5-tower: TransUnion + /route + 5-tower inference (same workflow as app.py).
+# Build from repo root: docker build -f Dockerfile.5tower.unified -t smart-routing-5tower:latest .
+# Run deploy_5tower_snowflake.py to push to Snowflake and create SPCS service.
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY inference_server/requirements-5tower-unified.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY inference_server/app_5tower_unified.py app.py
+COPY ml ml
+# Copy 5-tower model only (no Alec): model.pkl, lookups/, threshold.json
+COPY exports/multitower_sale_5towers /app/models/multitower_sale_5towers
+
+RUN mkdir -p /mnt/stage
+ENV MODEL_PATH=/app/models/multitower_sale_5towers
+ENV PORT=8080
+EXPOSE 8080
+
+CMD ["python", "app.py"]
