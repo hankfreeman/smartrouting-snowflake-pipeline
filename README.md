@@ -2,7 +2,7 @@
 
 This repository is a **sanitized** snapshot: no real API keys, passwords, Snowflake account URLs, phone numbers, or customer data. Copy `.env.example` to `.env` and fill in your own values; never commit `.env` or private keys.
 
-This directory is a **complete** bundle for training, optional 22k/validatemarch evaluation, Snowflake SPCS deploy, and endpoint testing. A sibling folder of loose `scripts/` alone is **not** sufficient: those scripts expect a sibling `ml/` package and root-level training/deploy assets. This bundle includes `tests/test_route_smart.py`, `optional_scripts/` (22k pipelines), `requirements-training.txt`, `Dockerfile.5tower.unified.best` + `deploy_5tower_snowflake_best.py`, and `catboost_metadata/README.txt` for required reference metadata.
+This directory is a **complete** bundle for training, evaluation, Snowflake SPCS deploy, and endpoint testing. This bundle includes `tests/test_route_smart.py`, `optional_scripts/` (22k pipelines), `requirements-training.txt`, `Dockerfile.5tower.unified.best` + `deploy_5tower_snowflake_best.py`, and `catboost_metadata/README.txt` for required reference metadata.
 
 ---
 
